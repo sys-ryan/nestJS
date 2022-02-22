@@ -3,7 +3,7 @@ Post http://localhost:3000/auth/signup
 content-type: application/json
 
 {
-  "email": "unique1@test.com",
+  "email": "unique2@test.com",
   "password": "test123"
 }
 
@@ -12,10 +12,12 @@ POST http://localhost:3000/auth/signin
 Content-Type: application/json
 
 {
-  "email": "unique1@test.com",
+  "email": "unique2@test.com",
   "password": "test123"
 }
 
+### Get the currently signed in user
+Get http://localhost:3000/auth/whoami
 
 ### Find a particular user with a given ID
 GET http://localhost:3000/auth/2
