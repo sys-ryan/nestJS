@@ -57,6 +57,11 @@ export class UsersController {
     return this.usersService.findOne(session.userId);
   }
 
+  @Post('/signout')
+  signOut(@Session() session: any) {
+    session.userId = null;
+  }
+
   // @UseInterceptors(ClassSerializerInterceptor)
   // @UseInterceptors(new SerializeInterceptor(UserDto))
   // @Serialize(UserDto)
