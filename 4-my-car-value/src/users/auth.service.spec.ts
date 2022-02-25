@@ -62,4 +62,29 @@ describe('AuthService', () => {
       service.signin('asdf@asdf.com', 'asdf'),
     ).rejects.toBeInstanceOf(NotFoundException);
   });
+
+  it('throws if an invalid password is provided', async () => {
+    fakeUsersService.find = () =>
+      Promise.resolve([{ email: 'asdf@asdf.com', password: 'asdf' } as User]);
+    await expect(service.signin('asdf@asdf.com', 'asdf')).rejects.toThrow(
+      BadRequestException,
+    );
+  });
+
+  it('returns a user if correct password is provided', async () => {
+    fakeUsersService.find = async () =>
+      Promise.resolve([
+        {
+          email: 'asdf@adsf.com',
+          password:
+            '4b256a30a9ac0c2b.b15ee85329da6b5f01bd35f6aa7d314c36ef0fb35d4a3f9e26953207ed62a406',
+        } as User,
+      ]);
+    const user = await service.signin('asdf@asdf.com', 'mypassword');
+    expect(user).toBeDefined();
+
+    //getting the salted password for 'mypassword'
+    // const user = await service.signup('asdf@asdf.com', 'mypassword');
+    // console.log(user);
+  });
 });
