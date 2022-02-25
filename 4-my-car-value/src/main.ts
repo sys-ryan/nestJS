@@ -13,12 +13,6 @@ async function bootstrap() {
     }),
   );
 
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true, //do not allow any additional property other than registered ones on requests.
-    }),
-  );
-
   await app.listen(3000);
 }
 bootstrap();
